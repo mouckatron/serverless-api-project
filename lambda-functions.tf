@@ -7,7 +7,7 @@ resource "aws_lambda_function" "lambda" {
   s3_bucket = aws_s3_bucket.lambda.id
   s3_key    = "${var.lambda_functions[count.index].name}.zip"
 
-  handler = var.lambda_functions[count.index].name
+  handler = var.lambda_functions[count.index].handler
   runtime = var.lambda_functions[count.index].runtime
 
   role = aws_iam_role.lambda.arn
