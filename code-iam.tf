@@ -63,7 +63,6 @@ resource "aws_iam_role_policy" "codepipeline" {
         "s3:GetBucketVersioning"
       ],
       "Resource": [
-        ${var.include_frontend ? "\"${aws_s3_bucket.frontend[0].arn}\",\"${aws_s3_bucket.frontend[0].arn}/*\"," : ""}
         "${aws_s3_bucket.lambda.arn}",
         "${aws_s3_bucket.lambda.arn}/*"
       ]
@@ -85,7 +84,6 @@ resource "aws_iam_role_policy" "codepipeline" {
         "codecommit:GetUploadArchiveStatus"
       ],
       "Resource": [
-        ${var.include_frontend ? "\"${aws_codecommit_repository.frontend[0].arn}\"," : ""}
         "${aws_codecommit_repository.backend.arn}"
       ]
     },
@@ -99,18 +97,7 @@ resource "aws_iam_role_policy" "codepipeline" {
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ]
-    },${var.include_frontend ? <<END
-    {
-      \"Effect\": \"Allow\",
-      \"Action\": [
-        \"codepipeline:StartPipelineExecution\"
-      ],
-      \"Resource\": [
-        \"${aws_codepipeline.frontend[0].arn}\"
-      ]
     },
-END
-: ""}
     {
       "Effect": "Allow",
       "Action": [
