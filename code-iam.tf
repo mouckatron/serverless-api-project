@@ -78,6 +78,15 @@ resource "aws_iam_role_policy" "codepipeline" {
     {
       "Effect": "Allow",
       "Action": [
+        "codepipeline:StartPipelineExecution"
+      ],
+      "Resource": [
+        "${aws_codepipeline.backend.arn}"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "codecommit:GetBranch",
         "codecommit:GetCommit",
         "codecommit:UploadArchive",
