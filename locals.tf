@@ -1,4 +1,4 @@
 
 locals {
-  domain = "${var.appname}.${var.root_domain}"
+  domain = "${var.sub_domain}.${var.root_domain}"
 }

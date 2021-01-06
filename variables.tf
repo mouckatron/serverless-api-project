@@ -9,6 +9,11 @@ variable "root_domain" {
   type        = string
 }
 
+variable "sub_domain" {
+  description = "Sub domain which this all will be hosted at which will be joined with root_domain"
+  type        = string
+}
+
 variable "lambda_functions" {
   description = "A list of maps detailing the lambda functions"
   type        = list(any)
